@@ -7,7 +7,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart
 from aiogram.enums import ParseMode
 
-from config import PLANS, WELCOME_TEXT, REVIEWS_TEXT, SUPPORT_TEXT, ADMIN_ID, OZON_PAYMENT_INSTRUCTIONS
+from config import PLANS, WELCOME_TEXT, REVIEWS_TEXT, SUPPORT_TEXT, ADMIN_ID, TBANK_PAYMENT_INSTRUCTIONS
 from database import create_order, get_order, update_order_status, add_review
 from keyboards import (
     main_menu_keyboard, plan_confirm_keyboard, payment_keyboard,
@@ -88,7 +88,7 @@ async def process_payment(callback: CallbackQuery, bot: Bot):
     )
 
     # Формируем инструкцию по оплате
-    payment_text = OZON_PAYMENT_INSTRUCTIONS.format(
+    payment_text = TBANK_PAYMENT_INSTRUCTIONS.format(
         price=plan["price"],
         order_id=order_id,
     )
@@ -167,6 +167,7 @@ async def client_paid(callback: CallbackQuery, bot: Bot):
         f"📋 Тариф: {PLANS[order['plan_key']]['label']}\n"
         f"💰 Сумма: {order['price']}₽",
         parse_mode=ParseMode.MARKDOWN_V2,
+        reply_markup=back_to_menu_keyboard(),
     )
 
     # Обновляем сообщение у админа
@@ -181,7 +182,7 @@ async def client_paid(callback: CallbackQuery, bot: Bot):
                 f"👤 @{user.username or 'без username'}\n"
                 f"📅 {plan['emoji']} {plan['label']} | *{plan['price']}₽*\n\n"
                 f"⚡ Статус: 🟢 *Клиент оплатил*\n\n"
-                f"✅ Проверьте Ozon и подтвердите\\!"
+                f"✅ Проверьте поступление и подтвердите\\!"
             )
 
             await bot.edit_message_text(

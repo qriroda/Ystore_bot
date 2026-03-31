@@ -2,7 +2,7 @@
 # ⌨️ Клавиатуры (Inline Keyboards)
 # ============================================
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-from config import PLANS, OZON_PAYMENT_URL
+from config import PLANS, TBANK_PAYMENT_URL
 
 
 def main_menu_keyboard() -> InlineKeyboardMarkup:
@@ -18,7 +18,7 @@ def main_menu_keyboard() -> InlineKeyboardMarkup:
 
     buttons.append([
         InlineKeyboardButton(text="⭐ Отзывы клиентов", callback_data="reviews"),
-        InlineKeyboardButton(text="📞 Связаться", callback_data="support"),
+        InlineKeyboardButton(text="📞 Связаться", url="https://t.me/namyayanami"),
     ])
 
     return InlineKeyboardMarkup(inline_keyboard=buttons)
@@ -44,8 +44,8 @@ def payment_keyboard(order_id: int, plan_key: str) -> InlineKeyboardMarkup:
     buttons = [
         # Ссылка на Ozon (открывается в браузере / WebView)
         [InlineKeyboardButton(
-            text="🟦 Оплатить через Ozon",
-            url=OZON_PAYMENT_URL
+            text="💳 Оплатить картой / T-Pay",
+            url=TBANK_PAYMENT_URL
         )],
         [InlineKeyboardButton(
             text="✅ Я оплатил",
