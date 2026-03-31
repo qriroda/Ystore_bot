@@ -1,0 +1,21 @@
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Секреты (ВАЖНО!)
+.env
+
+# База данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Логи и временные файлы
+*.log
+.venv/
+venv/
+env/
+.idea/
+.vscode/
