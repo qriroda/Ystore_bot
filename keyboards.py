@@ -2,7 +2,7 @@
 # ⌨️ Клавиатуры (Inline Keyboards)
 # ============================================
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-from config import PLANS, TBANK_PAYMENT_URL
+from config import PLANS, PAYMENT_URL
 
 
 def main_menu_keyboard() -> InlineKeyboardMarkup:
@@ -44,8 +44,8 @@ def payment_keyboard(order_id: int, plan_key: str) -> InlineKeyboardMarkup:
     buttons = [
         # Ссылка на Ozon (открывается в браузере / WebView)
         [InlineKeyboardButton(
-            text="💳 Оплатить картой / T-Pay",
-            url=TBANK_PAYMENT_URL
+            text="💳 Оплатить",
+            url=f"{PAYMENT_URL}?amount={plan['price']}&sum={plan['price']}"
         )],
         [InlineKeyboardButton(
             text="✅ Я оплатил",

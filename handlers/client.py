@@ -7,7 +7,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart
 from aiogram.enums import ParseMode
 
-from config import PLANS, WELCOME_TEXT, REVIEWS_TEXT, SUPPORT_TEXT, ADMIN_ID, TBANK_PAYMENT_INSTRUCTIONS
+from config import PLANS, WELCOME_TEXT, REVIEWS_TEXT, SUPPORT_TEXT, ADMIN_ID, PAYMENT_INSTRUCTIONS
 from database import create_order, get_order, update_order_status, add_review
 from keyboards import (
     main_menu_keyboard, plan_confirm_keyboard, payment_keyboard,
@@ -88,7 +88,7 @@ async def process_payment(callback: CallbackQuery, bot: Bot):
     )
 
     # Формируем инструкцию по оплате
-    payment_text = TBANK_PAYMENT_INSTRUCTIONS.format(
+    payment_text = PAYMENT_INSTRUCTIONS.format(
         price=plan["price"],
         order_id=order_id,
     )
